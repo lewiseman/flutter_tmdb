@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tmdb_desktop/common/toggle/toggle_tittle.dart';
 import 'package:tmdb_desktop/common/toggle/toggler_gradient.dart';
 import 'package:tmdb_desktop/api/home_page/models.dart';
 import 'package:tmdb_desktop/api/home_page/services.dart';
@@ -27,7 +26,7 @@ class _LatestTrailersState extends State<LatestTrailers> {
                 Padding(
                   padding: EdgeInsets.only(right: 20),
                   child: Text(
-                    'Latest Trailers',
+                    'Latest Tv Shows',
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

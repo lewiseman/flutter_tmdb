@@ -4,6 +4,7 @@ import 'package:tmdb_desktop/api/home_page/models.dart';
 import 'package:tmdb_desktop/api/home_page/services.dart';
 import 'package:tmdb_desktop/common/toggle/toggle_tittle.dart';
 import 'package:tmdb_desktop/common/toggle/toggler.dart';
+import 'package:tmdb_desktop/common/wave/tmdb_wave.dart';
 
 class Trending extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _TrendingState extends State<Trending> {
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Row(
               children: [
-                toggleTittle('What\'s Popular'),
+                toggleTittle('Trending'),
                 Toggler(
                   isFirst: isToday,
                   firstTitle: 'Today',
@@ -75,83 +76,77 @@ class TrendingRow extends StatelessWidget {
               } else if (snapshot.hasData) {
                 List<Film>? films = snapshot.data;
                 return Container(
-                  width: 1300,
+                  padding: EdgeInsets.only(top: 20, left: 40),
                   height: 400,
-                  child: Stack(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 20, left: 40),
-                        height: 400,
-                        child: Scrollbar(
-                          child: GridView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 20,
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 400,
-                                    childAspectRatio: 2),
-                            itemBuilder: (context, index) {
-                              return GridTile(
-                                child: Container(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                  child: CustomPaint(
+                    painter: WavePainter(),
+                    child: Scrollbar(
+                      child: GridView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 20,
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 400,
+                          childAspectRatio: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return GridTile(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Stack(
                                     children: [
-                                      Stack(
-                                        children: [
-                                          Container(
-                                            height: 255,
-                                            width: 150,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  'https://www.themoviedb.org/t/p/w220_and_h330_face/${films![index].posterPath}',
-                                                ),
-                                                fit: BoxFit.fitHeight,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                      Container(
+                                        height: 255,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://www.themoviedb.org/t/p/w220_and_h330_face/${films![index].posterPath}',
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${films[index].title}',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                              maxLines: 3,
-                                              overflow: TextOverflow.fade,
-                                            ),
-                                            Text(
-                                              '${films[index].releaseDate}',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.black54,
-                                              ),
-                                              maxLines: 1,
-                                            )
-                                          ],
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${films[index].title}',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.fade,
+                                        ),
+                                        Text(
+                                          '${films[index].releaseDate}',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.black54,
+                                          ),
+                                          maxLines: 1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 );
               } else {

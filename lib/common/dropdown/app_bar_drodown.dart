@@ -175,7 +175,10 @@ class _DropDownItemState extends State<DropDownItem> {
   Widget build(BuildContext context) {
     return MouseRegion(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => widget.pageTo));
+        },
         child: Container(
           width: widget.width,
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
