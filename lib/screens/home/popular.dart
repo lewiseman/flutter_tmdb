@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tmdb_desktop/api/home_page/models.dart';
 import 'package:tmdb_desktop/api/home_page/services.dart';
+import 'package:tmdb_desktop/common/percentage_indicator/tmdb_progress.dart';
 import 'package:tmdb_desktop/common/toggle/toggle_tittle.dart';
 import 'package:tmdb_desktop/common/toggle/toggler.dart';
 
@@ -193,6 +194,7 @@ class PopularRowTheater extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Stack(
+                                clipBehavior: Clip.none,
                                 children: [
                                   Container(
                                     height: 255,
@@ -206,11 +208,16 @@ class PopularRowTheater extends StatelessWidget {
                                       ),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
+                                  ),
+                                  Positioned(
+                                    bottom: -20,
+                                    left: 10,
+                                    child: MovieRateIndicator(percent: shows[index].popularity),
                                   )
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(top: 25, left: 8, right: 8),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
